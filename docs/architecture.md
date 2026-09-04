@@ -2,13 +2,12 @@
 
 This document translates the V1 product requirements into an implementation-level architecture. It is intentionally limited to the controlled Android pilot.
 
-## Rendered diagram exports
+## Diagram exports
 
-The rendered SVGs are available in [`docs/diagrams/`](diagrams/). The local data model remains inline Mermaid because it is compact and easy to read as source.
+The system context and local data model remain inline Mermaid. The SOS sequence is maintained as an editable Koboyo diagram, and the V1 build boundary is available as a local SVG.
 
-- [System context SVG](diagrams/system-context.svg)
-- [SOS sequence SVG](diagrams/sos-sequence.svg)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
+- [SOS sequence in Koboyo](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
 
 ## Architecture principles
 
@@ -22,7 +21,44 @@ The rendered SVGs are available in [`docs/diagrams/`](diagrams/). The local data
 
 ## 1. V1 system context
 
-![LIMBUZZ V1 system context](diagrams/system-context.svg)
+```mermaid
+flowchart LR
+    User((User))
+    Contacts((Emergency contacts))
+    Carriers[Cellular carriers\nSMS and voice]
+    Maps[Map provider\nlink opened by recipient]
+    Firebase[Firebase Auth\noptional Google Sign-In]
+
+    subgraph Device[Android device]
+        App[LIMBUZZ Flutter app]
+        Native[Native Android adapters]
+        Store[(Local database\ncontacts, sessions, actions)]
+        Files[(Private local files\naudio recordings)]
+        FGS[Android foreground service\npersistent emergency session]
+        Location[Android location services]
+        SMS[Android SMS manager]
+        Phone[Android dialer / call manager]
+        Audio[Android microphone]
+    end
+
+    User --> App
+    App <--> Native
+    App <--> Store
+    App <--> Files
+    App --> FGS
+    FGS <--> Store
+    Native --> Location
+    Native --> SMS
+    Native --> Phone
+    Native --> Audio
+    Location -. map URL .-> SMS
+    SMS --> Carriers
+    Phone --> Carriers
+    Carriers --> Contacts
+    Contacts --> Maps
+    App -. optional sign-in .-> Firebase
+    App --> User
+```
 
 ### System boundary
 
@@ -32,7 +68,12 @@ The cellular network is the emergency transport. Firebase is outside the critica
 
 ## 2. SOS emergency sequence
 
-![LIMBUZZ V1 SOS emergency sequence](diagrams/sos-sequence.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg?theme=dark">
+  <img alt="LIMBUZZ V1 SOS Emergency Flow" src="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg">
+</picture>
+
+Editable version: [Koboyo SOS Emergency Flow](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
 
 ### Important runtime rules
 
