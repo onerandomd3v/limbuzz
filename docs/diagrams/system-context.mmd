@@ -1,0 +1,36 @@
+flowchart LR
+    User((User))
+    Contacts((Emergency contacts))
+    Carriers[Cellular carriers\nSMS and voice]
+    Maps[Map provider\nlink opened by recipient]
+    Firebase[Firebase Auth\noptional Google Sign-In]
+
+    subgraph Device[Android device]
+        App[LIMBUZZ Flutter app]
+        Native[Native Android adapters]
+        Store[(Local database\ncontacts, sessions, actions)]
+        Files[(Private local files\naudio recordings)]
+        FGS[Android foreground service\npersistent emergency session]
+        Location[Android location services]
+        SMS[Android SMS manager]
+        Phone[Android dialer / call manager]
+        Audio[Android microphone]
+    end
+
+    User --> App
+    App <--> Native
+    App <--> Store
+    App <--> Files
+    App --> FGS
+    FGS <--> Store
+    Native --> Location
+    Native --> SMS
+    Native --> Phone
+    Native --> Audio
+    Location -. map URL .-> SMS
+    SMS --> Carriers
+    Phone --> Carriers
+    Carriers --> Contacts
+    Contacts --> Maps
+    App -. optional sign-in .-> Firebase
+    App --> User

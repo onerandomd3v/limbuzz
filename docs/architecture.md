@@ -2,6 +2,15 @@
 
 This document translates the V1 product requirements into an implementation-level architecture. It is intentionally limited to the controlled Android pilot.
 
+## Rendered and editable exports
+
+The Mermaid diagrams below are the text source. Rendered SVGs and editable Draw.io files are available in [`docs/diagrams/`](diagrams/).
+
+- [System context SVG](diagrams/system-context.svg) · [Draw.io](diagrams/system-context.drawio)
+- [SOS sequence SVG](diagrams/sos-sequence.svg) · [Draw.io](diagrams/sos-sequence.drawio)
+- [Local data model SVG](diagrams/local-data-model.svg) · [Draw.io](diagrams/local-data-model.drawio)
+- [V1 build boundary SVG](diagrams/v1-boundary.svg) · [Draw.io](diagrams/v1-boundary.drawio)
+
 ## Architecture principles
 
 - The emergency path is local-first and must not depend on internet access.

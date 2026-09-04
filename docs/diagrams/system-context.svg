@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-label="LIMBUZZ V1 — System Context">
+<rect width="1280" height="760" fill="#fbfdff"/>
+<text x="56" y="62" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="700" fill="#263238">LIMBUZZ V1 — System Context</text>
+<text x="56" y="92" font-family="Inter,Arial,sans-serif" font-size="15" fill="#607d8b">Offline-first Android safety app · device-side emergency transport</text>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#90a4ae"/></marker></defs>
+<rect x="60" y="300" width="150" height="70" rx="14" fill="#fff0d6" stroke="#ef8b22" stroke-width="2"/>
+<text x="135.0" y="330.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">User</text>
+<rect x="1080" y="210" width="150" height="70" rx="14" fill="#def5e7" stroke="#2e8b57" stroke-width="2"/>
+<text x="1155.0" y="240.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Contacts</text>
+<rect x="1080" y="470" width="150" height="70" rx="14" fill="#def5e7" stroke="#2e8b57" stroke-width="2"/>
+<text x="1155.0" y="500.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Map provider</text>
+<text x="1155.0" y="525.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">recipient opens link</text>
+<rect x="430" y="150" width="250" height="105" rx="14" fill="#d9efff" stroke="#1976d2" stroke-width="2"/>
+<text x="555.0" y="197.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">LIMBUZZ Flutter app</text>
+<text x="555.0" y="222.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">screens · orchestration · SOS state</text>
+<rect x="430" y="350" width="250" height="105" rx="14" fill="#d9efff" stroke="#1976d2" stroke-width="2"/>
+<text x="555.0" y="397.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Native Android adapters</text>
+<text x="555.0" y="422.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">SMS · call · location · audio</text>
+<rect x="430" y="550" width="250" height="105" rx="14" fill="#def5e7" stroke="#2e8b57" stroke-width="2"/>
+<text x="555.0" y="597.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Local persistence</text>
+<text x="555.0" y="622.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">contacts · sessions · recordings</text>
+<rect x="800" y="150" width="180" height="80" rx="14" fill="#fff0d6" stroke="#ef8b22" stroke-width="2"/>
+<text x="890.0" y="185.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Foreground service</text>
+<text x="890.0" y="210.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">survives background limits</text>
+<rect x="800" y="350" width="180" height="80" rx="14" fill="#ffe1e1" stroke="#c62828" stroke-width="2"/>
+<text x="890.0" y="385.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Cellular network</text>
+<text x="890.0" y="410.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">SMS + voice</text>
+<rect x="800" y="550" width="180" height="80" rx="14" fill="#fff0d6" stroke="#ef8b22" stroke-width="2"/>
+<text x="890.0" y="585.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="600" fill="#263238">Firebase Auth</text>
+<text x="890.0" y="610.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">optional only</text>
+<path d="M210 335 L430 205" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M555 255 L555 350" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M555 455 L555 550" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M680 400 L800 390" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="740.0" y="387.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">SMS / call</text>
+<path d="M890 230 L890 350" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="890.0" y="282.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">emergency transport</text>
+<path d="M980 390 L1080 245" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M1155 280 L1155 470" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1155.0" y="367.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">location URL</text>
+<path d="M680 205 L800 190" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="740.0" y="189.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">active session</text>
+<path d="M680 205 L800 590" fill="none" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<text x="740.0" y="389.5" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" fill="#607d8b">optional sign-in</text>
+</svg>

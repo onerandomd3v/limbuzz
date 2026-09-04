@@ -1,0 +1,31 @@
+flowchart TB
+    subgraph V1[Build in V1]
+        UI[Flutter screens]
+        State[SOS state machine]
+        DB[Local database]
+        Platform[Android platform adapters]
+        FGS[Foreground service]
+        Auth[Optional Firebase Google Sign-In]
+        QA[Physical-device field testing]
+    end
+
+    subgraph Later[Explicitly outside V1]
+        Backend[Application backend]
+        Gateway[Africa's Talking gateway SMS]
+        Push[FCM push notifications]
+        History[Notification history]
+        Cloud[Cloud backup and media storage]
+        Social[Usernames and social discovery]
+    end
+
+    UI --> State --> Platform
+    State --> DB
+    Platform --> FGS
+    UI -. optional .-> Auth
+    QA --> UI
+    QA --> Platform
+    Backend -. deferred .-> Gateway
+    Backend -. deferred .-> Push
+    Backend -. deferred .-> History
+    Backend -. deferred .-> Cloud
+    Backend -. deferred .-> Social
