@@ -2,14 +2,13 @@
 
 This document translates the V1 product requirements into an implementation-level architecture. It is intentionally limited to the controlled Android pilot.
 
-## Rendered and editable exports
+## Rendered diagram exports
 
-The Mermaid diagrams below are the text source. Rendered SVGs and editable Draw.io files are available in [`docs/diagrams/`](diagrams/).
+The rendered SVGs are available in [`docs/diagrams/`](diagrams/). The local data model remains inline Mermaid because it is compact and easy to read as source.
 
-- [System context SVG](diagrams/system-context.svg) · [Draw.io](diagrams/system-context.drawio)
-- [SOS sequence SVG](diagrams/sos-sequence.svg) · [Draw.io](diagrams/sos-sequence.drawio)
-- [Local data model SVG](diagrams/local-data-model.svg) · [Draw.io](diagrams/local-data-model.drawio)
-- [V1 build boundary SVG](diagrams/v1-boundary.svg) · [Draw.io](diagrams/v1-boundary.drawio)
+- [System context SVG](diagrams/system-context.svg)
+- [SOS sequence SVG](diagrams/sos-sequence.svg)
+- [V1 build boundary SVG](diagrams/v1-boundary.svg)
 
 ## Architecture principles
 
@@ -23,44 +22,7 @@ The Mermaid diagrams below are the text source. Rendered SVGs and editable Draw.
 
 ## 1. V1 system context
 
-```mermaid
-flowchart LR
-    User((User))
-    Contacts((Emergency contacts))
-    Carriers[Cellular carriers\nSMS and voice]
-    Maps[Map provider\nlink opened by recipient]
-    Firebase[Firebase Auth\noptional Google Sign-In]
-
-    subgraph Device[Android device]
-        App[LIMBUZZ Flutter app]
-        Native[Native Android adapters]
-        Store[(Local database\ncontacts, sessions, actions)]
-        Files[(Private local files\naudio recordings)]
-        FGS[Android foreground service\npersistent emergency session]
-        Location[Android location services]
-        SMS[Android SMS manager]
-        Phone[Android dialer / call manager]
-        Audio[Android microphone]
-    end
-
-    User --> App
-    App <--> Native
-    App <--> Store
-    App <--> Files
-    App --> FGS
-    FGS <--> Store
-    Native --> Location
-    Native --> SMS
-    Native --> Phone
-    Native --> Audio
-    Location -. map URL .-> SMS
-    SMS --> Carriers
-    Phone --> Carriers
-    Carriers --> Contacts
-    Contacts --> Maps
-    App -. optional sign-in .-> Firebase
-    App --> User
-```
+![LIMBUZZ V1 system context](diagrams/system-context.svg)
 
 ### System boundary
 
@@ -70,65 +32,7 @@ The cellular network is the emergency transport. Firebase is outside the critica
 
 ## 2. SOS emergency sequence
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User
-    participant UI as Flutter UI
-    participant Session as Foreground service
-    participant DB as Local database
-    participant Location as Android location
-    participant Audio as Android microphone
-    participant SMS as Native SMS
-    participant Carrier as Cellular network
-    participant Contacts as Emergency contacts
-    participant Call as Native phone
-
-    User->>UI: Press and hold SOS
-    UI-->>User: Show 3-second progress
-    alt Released before 3 seconds
-        User->>UI: Release
-        UI-->>User: Abort with no side effects
-    else Hold completes
-        UI->>Session: Start emergency session
-        Session->>DB: Persist ACTIVE state
-        Session->>Audio: Start local recording if permitted
-        Session->>Location: Request immediate fix
-        par Dispatch emergency SMS
-            Session->>SMS: Send to all configured contacts
-            SMS->>Carrier: Device-side SMS
-            Carrier-->>Contacts: Emergency message
-            SMS-->>Session: Per-contact sent/failed status
-            Session->>DB: Persist each action outcome
-        and Wait for location, max 10 seconds
-            Location-->>Session: Best available fix or timeout
-        end
-        Session-->>UI: Show per-contact status and location state
-        Session->>Call: Dial primary contact after SMS dispatch
-        Call->>Carrier: Voice call
-        Carrier-->>Contacts: Primary-contact call
-        Session->>DB: Persist call outcome
-    end
-
-    opt Better location arrives after first SMS
-        Location-->>Session: Materially better fix
-        Session->>SMS: Send one optional follow-up SMS
-        SMS->>Carrier: Device-side SMS
-        Carrier-->>Contacts: Updated location
-        Session->>DB: Persist follow-up outcome
-    end
-
-    opt User cancels
-        User->>UI: Cancel active SOS
-        UI->>Session: End emergency session
-        Session->>Audio: Stop recording
-        Session->>SMS: Send all-clear to alerted contacts
-        SMS->>Carrier: Device-side SMS
-        Carrier-->>Contacts: False alarm / safe message
-        Session->>DB: Persist CLOSED state and outcomes
-        Session-->>UI: Show completed all-clear status
-    end
-```
+![LIMBUZZ V1 SOS emergency sequence](diagrams/sos-sequence.svg)
 
 ### Important runtime rules
 
@@ -215,39 +119,7 @@ erDiagram
 
 ## 4. Build boundary for V1
 
-```mermaid
-flowchart TB
-    subgraph V1[Build in V1]
-        UI[Flutter screens]
-        State[SOS state machine]
-        DB[Local database]
-        Platform[Android platform adapters]
-        FGS[Foreground service]
-        Auth[Optional Firebase Google Sign-In]
-        QA[Physical-device field testing]
-    end
-
-    subgraph Later[Explicitly outside V1]
-        Backend[Application backend]
-        Gateway[Africa's Talking gateway SMS]
-        Push[FCM push notifications]
-        History[Notification history]
-        Cloud[Cloud backup and media storage]
-        Social[Usernames and social discovery]
-    end
-
-    UI --> State --> Platform
-    State --> DB
-    Platform --> FGS
-    UI -. optional .-> Auth
-    QA --> UI
-    QA --> Platform
-    Backend -. deferred .-> Gateway
-    Backend -. deferred .-> Push
-    Backend -. deferred .-> History
-    Backend -. deferred .-> Cloud
-    Backend -. deferred .-> Social
-```
+![LIMBUZZ V1 build boundary](diagrams/v1-boundary.svg)
 
 ## 5. Open implementation decisions
 
