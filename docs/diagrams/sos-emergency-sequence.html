@@ -3,98 +3,74 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LIMBUZZ V1 SOS emergency sequence</title>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <title>LIMBUZZ V1 SOS emergency flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: light; }
     body { margin: 0; background: #f5f5f5; color: #2d3142; }
     svg { display: block; width: 100%; height: auto; }
     .title { font: 400 32px 'Instrument Serif', Georgia, serif; fill: #2d3142; }
-    .eyebrow, .tag, .label, .guard, .legend { font-family: 'Geist Mono', monospace; letter-spacing: .08em; }
-    .eyebrow { font-size: 12px; fill: #4f5d75; }
-    .actor { font: 600 16px Geist, Arial, sans-serif; fill: #2d3142; }
-    .tag, .legend { font-size: 10px; fill: #4f5d75; }
-    .label { font-size: 12px; fill: #2d3142; }
-    .guard { font-size: 10px; fill: #4f5d75; }
-    .card-title { font: 600 14px Geist, Arial, sans-serif; fill: #2d3142; }
-    .card-copy { font: 12px Geist, Arial, sans-serif; fill: #4f5d75; }
+    .eyebrow, .tag, .edge, .legend { font: 10px 'Geist Mono', monospace; letter-spacing: .08em; fill: #4f5d75; }
+    .state { font: 600 16px Geist, Arial, sans-serif; fill: #2d3142; }
+    .copy { font: 12px Geist, Arial, sans-serif; fill: #4f5d75; }
+    .callout { font: italic 16px 'Instrument Serif', Georgia, serif; fill: #2d3142; }
   </style>
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1080" role="img" aria-labelledby="sos-title sos-desc">
-    <title id="sos-title">LIMBUZZ V1 SOS emergency sequence</title>
-    <desc id="sos-desc">A five-lifeline sequence for emergency activation: a three-second hold persists an active session, sends device-side SMS before a primary-contact call, starts location and audio collection, records status and retries, and sends all-clear messages on cancellation.</desc>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="sos-flow-title sos-flow-desc">
+    <title id="sos-flow-title">LIMBUZZ V1 SOS emergency flow</title>
+    <desc id="sos-flow-desc">A state machine showing an SOS press move from idle through a three-second hold, contact alerting, active emergency protection, cancellation and closed state, including SMS-before-call, location, audio, retries and all-clear rules.</desc>
     <defs>
-      <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
-      <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
-      <marker id="arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0,8 3,0 6" fill="none" stroke="#4f5d75" stroke-width="1.2"/></marker>
+      <marker id="sos-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
+      <marker id="sos-flow-accent-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
     </defs>
-    <rect width="1280" height="1080" fill="#f5f5f5"/>
-    <text class="eyebrow" x="48" y="52">SEQUENCE · V1 EMERGENCY PATH</text>
-    <text class="title" x="48" y="92">SOS emergency, without the noise</text>
-    <text class="card-copy" x="48" y="120">The phone owns the critical path. It persists first, alerts first, then enriches and calls.</text>
+    <rect width="1280" height="720" fill="#f5f5f5"/>
+    <text class="eyebrow" x="48" y="52">STATE MACHINE · V1 EMERGENCY PATH</text>
+    <text class="title" x="48" y="92">From one hold to a safe close</text>
+    <text class="copy" x="48" y="120">The user sees a simple progression; the device keeps the emergency session durable and local-first.</text>
 
-    <!-- Actors and lifelines -->
+    <!-- Transitions are drawn first so state cards remain clear. -->
+    <g fill="none" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#sos-flow-arrow)">
+      <line x1="96" y1="336" x2="128" y2="336"/>
+      <line x1="288" y1="336" x2="352" y2="336"/>
+      <line x1="904" y1="336" x2="1016" y2="336"/>
+      <line x1="1176" y1="336" x2="1208" y2="336"/>
+      <path d="M352 320 V256 Q352 248 344 248 H296 Q288 248 288 256 V320"/>
+    </g>
+    <path d="M512 336 H640" fill="none" stroke="#eb6c36" stroke-width="1.8" marker-end="url(#sos-flow-accent-arrow)"/>
+
+    <!-- Transition labels have opaque masks and 8px clearance. -->
     <g>
-      <rect x="48" y="160" width="160" height="56" rx="6" fill="#eef0f5" stroke="#7a8399"/>
-      <text class="tag" x="64" y="180">INPUT</text><text class="actor" x="64" y="204">User</text>
-      <rect x="280" y="160" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text class="tag" x="296" y="180">APP</text><text class="actor" x="296" y="204">LIMBUZZ</text>
-      <rect x="512" y="160" width="160" height="56" rx="6" fill="#fff0ea" stroke="#eb6c36"/>
-      <text class="tag" x="528" y="180">FOCAL</text><text class="actor" x="528" y="204">SOS service</text>
-      <rect x="744" y="160" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text class="tag" x="760" y="180">DEVICE</text><text class="actor" x="760" y="204">Android</text>
-      <rect x="976" y="160" width="208" height="56" rx="6" fill="#eef0f5" stroke="#7a8399"/>
-      <text class="tag" x="992" y="180">RECIPIENTS</text><text class="actor" x="992" y="204">Emergency contacts</text>
-      <g stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3">
-        <line x1="128" y1="216" x2="128" y2="824"/><line x1="360" y1="216" x2="360" y2="824"/><line x1="592" y1="216" x2="592" y2="824"/><line x1="824" y1="216" x2="824" y2="824"/><line x1="1080" y1="216" x2="1080" y2="824"/>
-      </g>
+      <rect x="240" y="408" width="96" height="16" rx="2" fill="#f5f5f5"/><text class="edge" x="288" y="420" text-anchor="middle">SOS PRESS</text>
+      <rect x="504" y="216" width="144" height="16" rx="2" fill="#f5f5f5"/><text class="edge" x="576" y="228" text-anchor="middle">3 SEC / PERSIST ACTIVE</text>
+      <rect x="912" y="216" width="96" height="16" rx="2" fill="#f5f5f5"/><text class="edge" x="960" y="228" text-anchor="middle">CANCEL / ALL-CLEAR</text>
+      <rect x="1144" y="216" width="112" height="16" rx="2" fill="#f5f5f5"/><text class="edge" x="1200" y="228" text-anchor="middle">PERSIST CLOSED</text>
+      <rect x="256" y="208" width="120" height="16" rx="2" fill="#f5f5f5"/><text class="edge" x="316" y="220" text-anchor="middle">RELEASE &lt; 3 SEC</text>
     </g>
 
-    <!-- Message 1 -->
-    <line x1="128" y1="248" x2="360" y2="248" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
-    <rect x="184" y="224" width="120" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="244" y="236" text-anchor="middle">hold SOS · 3 sec</text>
+    <!-- Start, states, and end. -->
+    <circle cx="80" cy="336" r="8" fill="#2d3142"/>
+    <rect x="128" y="288" width="160" height="96" rx="8" fill="#eef0f5" stroke="#7a8399"/>
+    <text class="tag" x="144" y="312">SAFE</text><text class="state" x="144" y="340">Idle</text><text class="copy" x="144" y="364">SOS is ready</text>
+    <rect x="352" y="288" width="160" height="96" rx="8" fill="#ffffff" stroke="#2d3142"/>
+    <text class="tag" x="368" y="312">GUARD</text><text class="state" x="368" y="340">Holding</text><text class="copy" x="368" y="364">visible progress</text>
+    <rect x="640" y="256" width="264" height="160" rx="8" fill="#fff0ea" stroke="#eb6c36" stroke-width="1.4"/>
+    <text class="tag" x="656" y="280">FOCAL · ACTIVE SESSION</text><text class="state" x="656" y="312">Live emergency</text>
+    <text class="copy" x="656" y="340">device-side SMS to all contacts</text><text class="copy" x="656" y="360">then call the primary contact</text>
+    <text class="copy" x="656" y="380">record audio · best location or 10 sec</text><text class="copy" x="656" y="400">status + SMS retries: 15 / 45 sec</text>
+    <rect x="1016" y="288" width="160" height="96" rx="8" fill="#eef0f5" stroke="#7a8399"/>
+    <text class="tag" x="1032" y="312">CANCELLING</text><text class="state" x="1032" y="340">All clear</text><text class="copy" x="1032" y="364">alerted contacts</text>
+    <circle cx="1224" cy="336" r="12" fill="none" stroke="#2d3142" stroke-width="1.4"/><circle cx="1224" cy="336" r="7" fill="#2d3142"/>
+    <text class="tag" x="1200" y="372">CLOSED</text>
 
-    <!-- Single ALT fragment -->
-    <rect x="80" y="272" width="1056" height="552" rx="6" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.22)"/>
-    <rect x="80" y="272" width="48" height="20" rx="2" fill="#f5f5f5" stroke="rgba(45,49,66,0.22)"/><text class="guard" x="104" y="286" text-anchor="middle">ALT</text>
-    <text class="guard" x="96" y="312">[released early]</text>
-    <line x1="360" y1="336" x2="128" y2="336" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
-    <rect x="200" y="312" width="88" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="244" y="324" text-anchor="middle">no side effects</text>
-    <line x1="96" y1="360" x2="1120" y2="360" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-    <text class="guard" x="96" y="388">[hold completes]</text>
-
-    <rect x="588" y="408" width="8" height="388" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
-    <line x1="360" y1="424" x2="592" y2="424" stroke="#eb6c36" stroke-width="1.6" marker-end="url(#arrow-accent)"/>
-    <rect x="400" y="400" width="152" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="476" y="412" text-anchor="middle">start + persist ACTIVE</text>
-    <line x1="592" y1="480" x2="824" y2="480" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
-    <rect x="628" y="456" width="160" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="708" y="468" text-anchor="middle">device SMS · all contacts</text>
-    <line x1="824" y1="536" x2="1080" y2="536" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
-    <rect x="876" y="512" width="152" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="952" y="524" text-anchor="middle">emergency message</text>
-    <line x1="824" y1="592" x2="592" y2="592" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
-    <rect x="624" y="568" width="168" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="708" y="580" text-anchor="middle">status + retries · 15 / 45 sec</text>
-    <line x1="592" y1="648" x2="824" y2="648" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
-    <rect x="632" y="624" width="152" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="708" y="636" text-anchor="middle">start audio + location</text>
-    <line x1="824" y1="704" x2="592" y2="704" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
-    <rect x="616" y="680" width="184" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="708" y="692" text-anchor="middle">recording; best fix or 10 sec</text>
-    <line x1="592" y1="760" x2="360" y2="760" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
-    <rect x="400" y="736" width="152" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="476" y="748" text-anchor="middle">live delivery status</text>
-    <line x1="592" y1="800" x2="824" y2="800" stroke="#eb6c36" stroke-width="1.6" marker-end="url(#arrow-accent)"/>
-    <rect x="612" y="776" width="192" height="16" rx="2" fill="#f5f5f5"/><text class="label" x="708" y="788" text-anchor="middle">call primary after SMS dispatch</text>
-    <line x1="824" y1="816" x2="1080" y2="816" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#arrow)"/>
-
-    <!-- Operational guarantees replace excess lifelines and fragments. -->
-    <line x1="48" y1="872" x2="1232" y2="872" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
-    <text class="legend" x="48" y="904">ALWAYS TRUE</text>
-    <rect x="48" y="928" width="344" height="104" rx="6" fill="#fff0ea" stroke="#eb6c36"/>
-    <text class="card-title" x="64" y="956">Alert before call</text>
-    <text class="card-copy" x="64" y="980">SMS starts to every contact before</text><text class="card-copy" x="64" y="1000">the primary-contact voice call.</text>
-    <rect x="448" y="928" width="344" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
-    <text class="card-title" x="464" y="956">Persist every outcome</text>
-    <text class="card-copy" x="464" y="980">Session, action attempts, failures, and</text><text class="card-copy" x="464" y="1000">latest status survive restart or reboot.</text>
-    <rect x="848" y="928" width="384" height="104" rx="6" fill="#eef0f5" stroke="#7a8399"/>
-    <text class="card-title" x="864" y="956">Cancel = all clear</text>
-    <text class="card-copy" x="864" y="980">Stop audio, SMS every alerted contact an</text><text class="card-copy" x="864" y="1000">all-clear, then persist the CLOSED session.</text>
+    <!-- The two facts a reader must retain without adding workflow states. -->
+    <line x1="48" y1="464" x2="1232" y2="464" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+    <text class="legend" x="48" y="500">WHY THIS FLOW IS SAFE</text>
+    <text class="callout" x="48" y="548">“The first emergency SMS never waits for location.”</text>
+    <text class="copy" x="48" y="576">Location enriches the active session in parallel; a 10-second timeout leaves alert delivery intact.</text>
+    <rect x="776" y="504" width="456" height="112" rx="8" fill="#ffffff" stroke="#2d3142"/>
+    <text class="tag" x="800" y="532">DURABILITY</text><text class="state" x="800" y="560">Every transition is recoverable</text>
+    <text class="copy" x="800" y="584">Persist session state and action results so restart or reboot can safely resume.</text>
+    <text class="copy" x="800" y="604">A failure updates status; it never stops another contact from being alerted.</text>
   </svg>
 </body>
 </html>

@@ -4,11 +4,11 @@ This document translates the V1 product requirements into an implementation-leve
 
 ## Diagram exports
 
-The system context and local data model remain inline Mermaid. The SOS sequence is maintained as editable HTML with a standalone SVG export, and the V1 build boundary is available as a local SVG.
+The system context and local data model remain inline Mermaid. The SOS emergency flow is maintained as editable HTML with a standalone SVG export, and the V1 build boundary is available as a local SVG.
 
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
-- [SOS sequence source HTML](diagrams/sos-emergency-sequence.html)
-- [SOS sequence SVG export](diagrams/sos-emergency-sequence.svg)
+- [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
+- [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
 
 ## Architecture principles
 
@@ -67,11 +67,11 @@ The Flutter application owns screens, validation, the SOS state machine, orchest
 
 The cellular network is the emergency transport. Firebase is outside the critical path and may be unreachable, unavailable, or unused.
 
-## 2. SOS emergency sequence
+## 2. SOS emergency flow
 
-![LIMBUZZ V1 SOS emergency sequence](diagrams/sos-emergency-sequence.svg)
+![LIMBUZZ V1 SOS emergency flow](diagrams/sos-emergency-sequence.svg)
 
-Editable source: [SOS sequence HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
+Editable source: [SOS emergency flow HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
 
 ### Important runtime rules
 
