@@ -4,11 +4,10 @@ This document translates the V1 product requirements into an implementation-leve
 
 ## Diagram exports
 
-The system context and local data model remain inline Mermaid. The SOS emergency flow is maintained as editable HTML with a standalone SVG export, and the V1 build boundary is available as a local SVG.
+The system context and local data model remain inline Mermaid. The SOS emergency flow and V1 build boundary are maintained as editable HTML with standalone SVG exports.
 
+- [V1 build boundary source HTML](diagrams/v1-boundary.html)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
-- [Alternative V1 build boundary source HTML](diagrams/v1-boundary-editorial.html)
-- [Alternative V1 build boundary SVG](diagrams/v1-boundary-editorial.svg)
 - [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
 - [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
 - [SOS operational flow source HTML](diagrams/sos-emergency-operation.html)

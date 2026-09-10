@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="sos-flow-title sos-flow-desc">
     <title id="sos-flow-title">LIMBUZZ V1 SOS emergency flow</title>
     <desc id="sos-flow-desc">A state machine showing an SOS press move from idle through a three-second hold, contact alerting, active emergency protection, cancellation and closed state, including SMS-before-call, location, audio, retries and all-clear rules.</desc>
-    <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+    <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');.title{font:400 32px 'Instrument Serif',Georgia,serif;fill:#2d3142}.eyebrow,.tag,.edge,.legend,.lane{font:10px 'Geist Mono',monospace;letter-spacing:.08em;fill:#4f5d75}.name,.state,.node{font:600 16px Geist,Arial,sans-serif;fill:#2d3142}.node{font-size:14px}.copy{font:12px Geist,Arial,sans-serif;fill:#4f5d75}.callout{font:italic 16px 'Instrument Serif',Georgia,serif;fill:#2d3142}</style>
       <marker id="sos-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
       <marker id="sos-flow-accent-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
     </defs>
@@ -34,15 +34,19 @@
     <circle cx="80" cy="336" r="8" fill="#2d3142"/>
     <rect x="128" y="288" width="160" height="96" rx="8" fill="#eef0f5" stroke="#7a8399"/>
     <text class="tag" x="144" y="312">SAFE</text><text class="state" x="144" y="340">Idle</text><text class="copy" x="144" y="364">SOS is ready</text>
+    <g transform="translate(250 318) scale(.75)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></g>
     <rect x="352" y="288" width="160" height="96" rx="8" fill="#ffffff" stroke="#2d3142"/>
     <text class="tag" x="368" y="312">GUARD</text><text class="state" x="368" y="340">Holding</text><text class="copy" x="368" y="364">visible progress</text>
+    <g transform="translate(476 318) scale(.75)" fill="none" stroke="#2d3142" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
     <rect x="640" y="248" width="264" height="176" rx="8" fill="#fff0ea" stroke="#eb6c36" stroke-width="1.4"/>
     <text class="tag" x="656" y="272">FOCAL · ACTIVE SESSION</text><text class="state" x="656" y="304">Live emergency</text>
     <text class="copy" x="656" y="332">device-side SMS to all contacts</text><text class="copy" x="656" y="352">then call the primary contact</text>
     <text class="copy" x="656" y="372">record audio · best location or 10 sec</text><text class="copy" x="656" y="392">status; other contacts continue</text>
     <text class="copy" x="656" y="412">failed SMS retry: 15 / 45 sec</text>
+    <g transform="translate(864 278)" fill="none" stroke="#eb6c36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-14"/><path d="M11 4h2M12 17v.01"/></g>
     <rect x="1016" y="288" width="160" height="96" rx="8" fill="#eef0f5" stroke="#7a8399"/>
     <text class="tag" x="1032" y="312">CANCELLING</text><text class="state" x="1032" y="340">All clear</text><text class="copy" x="1032" y="364">alerted contacts</text>
+    <g transform="translate(1144 318) scale(.75)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M13 15h2a4 4 0 0 1 4 4v2"/></g>
     <circle cx="1224" cy="336" r="12" fill="none" stroke="#2d3142" stroke-width="1.4"/><circle cx="1224" cy="336" r="7" fill="#2d3142"/>
     <text class="tag" x="1200" y="372">CLOSED</text>
 
