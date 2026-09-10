@@ -82,6 +82,16 @@ The cellular network is the emergency transport. Firebase is outside the critica
 
 ## 2. SOS emergency flow
 
+### What happens when SOS is pressed
+
+1. The user holds the SOS control for three seconds. Releasing it earlier cancels activation without side effects.
+2. At three seconds, LIMBUZZ persists the emergency session and starts the Android foreground service. Audio recording begins immediately when microphone permission is available, and location capture starts in parallel.
+3. The device sends an emergency SMS to every configured contact. It does not wait for the audio recording or a perfect location fix; if no location is ready by ten seconds, the alert continues without it.
+4. After SMS dispatch begins, LIMBUZZ calls the primary contact. Audio continues while the emergency session is active, and SMS retries and per-contact status are shown independently.
+5. The recording stays in the app’s private device storage. It is not automatically sent to contacts, uploaded, or placed in the cloud.
+6. When the user cancels or ends the emergency, recording stops, the session closes, and an all-clear SMS goes to every contact already alerted.
+7. If the app is force-closed or the phone reboots while the session is open, LIMBUZZ restores the session on the next launch and asks whether the emergency is over.
+
 ![LIMBUZZ V1 SOS emergency flow](diagrams/sos-emergency-sequence.svg)
 
 Editable source: [SOS emergency flow HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
