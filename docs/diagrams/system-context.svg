@@ -26,7 +26,7 @@
       <path d="M760 332 H780 Q788 332 788 340 V386 Q788 394 800 394"/>
       <path d="M760 374 H780 Q788 374 788 450 V500 Q788 508 800 508"/>
       <path d="M760 360 H780 Q788 360 788 560 V614 Q788 622 800 622"/>
-      <path d="M940 396 H990 Q1000 396 1000 350 H1040" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M940 396 H990 Q1000 396 1000 350 H1040" marker-end="url(#context-arrow)"/>
       <path d="M940 502 H990 Q1000 502 1000 360 H1040"/>
       <path d="M1136 580 V620"/>
     </g>
