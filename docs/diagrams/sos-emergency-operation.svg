@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1120" role="img" aria-labelledby="sos-operation-title sos-operation-desc">
+    <title id="sos-operation-title">LIMBUZZ V1 SOS operational flow</title>
+    <desc id="sos-operation-desc">A four-lane operational flow showing the user, LIMBUZZ service, Android platform and emergency contacts during an SOS, including durable session creation, device-side SMS, location and audio work, retries, primary call, cancellation and recovery.</desc>
+    <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');</style>
+      <marker id="sos-op-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
+      <marker id="sos-op-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
+    </defs>
+    <rect width="1280" height="1120" fill="#f5f5f5"/>
+    <text class="eyebrow" x="48" y="52">SWIMLANE · V1 OPERATIONAL HANDOFFS</text>
+    <text class="title" x="48" y="92">What runs after the SOS hold completes</text>
+    <text class="copy" x="48" y="120">Time flows downward. The emergency path remains device-side and works without data.</text>
+
+    <!-- Lanes -->
+    <rect x="48" y="160" width="1184" height="896" fill="#ffffff" stroke="#2d3142" stroke-opacity="0.18"/>
+    <rect x="48" y="160" width="208" height="896" fill="#eef0f5"/>
+    <rect x="256" y="160" width="344" height="896" fill="#ffffff"/>
+    <rect x="600" y="160" width="320" height="896" fill="#fffaf7"/>
+    <rect x="920" y="160" width="312" height="896" fill="#eef0f5"/>
+    <g stroke="#2d3142" stroke-opacity="0.18" stroke-width="1"><line x1="256" y1="160" x2="256" y2="1056"/><line x1="600" y1="160" x2="600" y2="1056"/><line x1="920" y1="160" x2="920" y2="1056"/></g>
+    <text class="lane" x="64" y="188">USER</text><text class="lane" x="272" y="188">LIMBUZZ + SOS SERVICE</text><text class="lane" x="616" y="188">ANDROID PLATFORM</text><text class="lane" x="936" y="188">EMERGENCY CONTACTS</text>
+
+    <!-- Handoffs, drawn before steps. -->
+    <g fill="none" stroke="#4f5d75" stroke-width="1.4" marker-end="url(#sos-op-arrow)">
+      <path d="M208 256 H280 Q288 256 288 264 V288 Q288 296 296 296 H320"/>
+      <path d="M560 344 H632 Q640 344 640 352 V392 Q640 400 648 400"/>
+      <path d="M872 520 H952 Q960 520 960 528 V560 Q960 568 968 568"/>
+      <path d="M968 616 H584 Q576 616 576 624 V664 Q576 672 568 672" stroke-dasharray="5,4"/>
+      <path d="M560 720 H632 Q640 720 640 728 V752 Q640 760 648 760"/>
+      <path d="M872 784 H968"/>
+      <path d="M208 848 H280 Q288 848 288 856 V880 Q288 888 296 888 H320"/>
+      <path d="M560 912 H632 Q640 912 640 920 V936 Q640 944 648 944"/>
+      <path d="M872 944 H968"/>
+      <path d="M648 976 H584 Q576 976 576 984 V1000 Q576 1008 568 1008" stroke-dasharray="5,4"/>
+    </g>
+    <path d="M560 344 H632 Q640 344 640 352 V392 Q640 400 648 400" fill="none" stroke="#eb6c36" stroke-width="1.8" marker-end="url(#sos-op-accent)"/>
+    <!-- Steps -->
+    <rect x="64" y="208" width="144" height="48" rx="6" fill="#ffffff" stroke="#7a8399"/><text class="node" x="80" y="236">Hold SOS · 3 sec</text>
+    <rect x="320" y="280" width="240" height="64" rx="6" fill="#fff0ea" stroke="#eb6c36"/><text class="tag" x="336" y="304">FOREGROUND SERVICE</text><text class="node" x="336" y="328">Persist ACTIVE session</text>
+    <rect x="648" y="392" width="224" height="136" rx="6" fill="#ffffff" stroke="#2d3142"/>
+    <text class="tag" x="664" y="416">PARALLEL AFTER ACTIVATION</text><text class="node" x="664" y="440">Start device-side SMS</text>
+    <text class="copy" x="664" y="464">all contacts · within 1 sec</text><text class="copy" x="664" y="484">map link if available · 10 sec max</text><text class="copy" x="664" y="504">audio starts locally if permitted</text>
+    <rect x="968" y="560" width="216" height="56" rx="6" fill="#ffffff" stroke="#7a8399"/><text class="node" x="984" y="588">Receive emergency SMS</text>
+    <rect x="320" y="648" width="240" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/><text class="node" x="336" y="676">Show per-contact status</text><text class="copy" x="336" y="700">now, +15 sec, +45 sec; then failed</text>
+    <rect x="648" y="752" width="224" height="64" rx="6" fill="#fff0ea" stroke="#eb6c36"/><text class="node" x="664" y="780">Call primary contact</text><text class="copy" x="664" y="804">only after SMS dispatch confirms</text>
+    <rect x="968" y="752" width="216" height="64" rx="6" fill="#ffffff" stroke="#7a8399"/><text class="node" x="984" y="780">Primary receives call</text><text class="copy" x="984" y="804">failure does not end SOS</text>
+    <rect x="64" y="824" width="144" height="48" rx="6" fill="#ffffff" stroke="#7a8399"/><text class="node" x="80" y="852">Cancel active SOS</text>
+    <rect x="320" y="880" width="240" height="64" rx="6" fill="#ffffff" stroke="#2d3142"/><text class="node" x="336" y="908">Close or cancel session</text><text class="copy" x="336" y="932">no confirmation prompt</text>
+    <rect x="648" y="928" width="224" height="64" rx="6" fill="#ffffff" stroke="#2d3142"/><text class="node" x="664" y="956">Stop audio; send all-clear</text><text class="copy" x="664" y="980">every alerted contact</text>
+    <rect x="968" y="928" width="216" height="64" rx="6" fill="#ffffff" stroke="#7a8399"/><text class="node" x="984" y="956">Receive all-clear</text><text class="copy" x="984" y="980">false alarm / user safe</text>
+    <rect x="320" y="1000" width="240" height="56" rx="6" fill="#eef0f5" stroke="#7a8399"/><text class="node" x="336" y="1028">Persist CLOSED + outcomes</text>
+
+    <line x1="48" y1="1072" x2="1232" y2="1072" stroke="#2d3142" stroke-opacity="0.18" stroke-width="1"/>
+    <text class="tag" x="48" y="1100">RECOVERY · IF FORCE-CLOSED OR REBOOTED WHILE OPEN, RESTORE THE SESSION ON NEXT LAUNCH AND ASK WHETHER THE EMERGENCY IS OVER.</text>
+  </svg>

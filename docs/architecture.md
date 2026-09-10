@@ -9,6 +9,8 @@ The system context and local data model remain inline Mermaid. The SOS emergency
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
 - [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
 - [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
+- [SOS operational flow source HTML](diagrams/sos-emergency-operation.html)
+- [SOS operational flow SVG export](diagrams/sos-emergency-operation.svg)
 
 ## Architecture principles
 
@@ -72,6 +74,12 @@ The cellular network is the emergency transport. Firebase is outside the critica
 ![LIMBUZZ V1 SOS emergency flow](diagrams/sos-emergency-sequence.svg)
 
 Editable source: [SOS emergency flow HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
+
+### Detailed operational flow
+
+![LIMBUZZ V1 SOS operational flow](diagrams/sos-emergency-operation.svg)
+
+This companion swimlane shows which actor owns each step after the hold completes. It complements the state flow above; it does not replace the runtime rules below.
 
 ### Important runtime rules
 
