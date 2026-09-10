@@ -4,10 +4,14 @@ This document translates the V1 product requirements into an implementation-leve
 
 ## Diagram exports
 
-The system context and local data model remain inline Mermaid. The SOS sequence is maintained as an editable Koboyo diagram, and the V1 build boundary is available as a local SVG.
+The system context and local data model remain inline Mermaid. The SOS emergency flow and V1 build boundary are maintained as editable HTML with standalone SVG exports.
 
+- [V1 build boundary source HTML](diagrams/v1-boundary.html)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
-- [SOS sequence in Koboyo](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
+- [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
+- [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
+- [SOS operational flow source HTML](diagrams/sos-emergency-operation.html)
+- [SOS operational flow SVG export](diagrams/sos-emergency-operation.svg)
 
 ## Architecture principles
 
@@ -66,14 +70,17 @@ The Flutter application owns screens, validation, the SOS state machine, orchest
 
 The cellular network is the emergency transport. Firebase is outside the critical path and may be unreachable, unavailable, or unused.
 
-## 2. SOS emergency sequence
+## 2. SOS emergency flow
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg?theme=dark">
-  <img alt="LIMBUZZ V1 SOS Emergency Flow" src="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg">
-</picture>
+![LIMBUZZ V1 SOS emergency flow](diagrams/sos-emergency-sequence.svg)
 
-Editable version: [Koboyo SOS Emergency Flow](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
+Editable source: [SOS emergency flow HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
+
+### Detailed operational flow
+
+![LIMBUZZ V1 SOS operational flow](diagrams/sos-emergency-operation.svg)
+
+This companion swimlane shows which actor owns each step after the hold completes. It complements the state flow above; it does not replace the runtime rules below.
 
 ### Important runtime rules
 
