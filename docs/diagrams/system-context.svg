@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" role="img" aria-labelledby="context-title context-desc">
+    <title id="context-title">LIMBUZZ V1 system context</title>
+    <desc id="context-desc">A repository-owned companion to the V1 Mermaid system context, showing the Flutter app, native Android adapters, local storage, foreground service, platform capabilities, cellular transport, contacts, maps and optional Firebase sign-in.</desc>
+    <defs><style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap');.title{font:400 32px 'Instrument Serif',Georgia,serif;fill:#2d3142}.eyebrow,.tag,.edge,.legend,.lane{font:10px 'Geist Mono',monospace;letter-spacing:.08em;fill:#4f5d75}.name{font:600 15px Geist,Arial,sans-serif;fill:#2d3142}.copy{font:12px Geist,Arial,sans-serif;fill:#4f5d75}</style>
+      <marker id="context-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker>
+      <marker id="context-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#eb6c36"/></marker>
+      <marker id="context-arrow-reverse" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto"><polygon points="8 0,0 3,8 6" fill="#4f5d75"/></marker>
+      <marker id="context-arrow-reverse-accent" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto"><polygon points="8 0,0 3,8 6" fill="#eb6c36"/></marker>
+    </defs>
+    <rect width="1280" height="860" fill="#f5f5f5"/>
+    <text class="eyebrow" x="48" y="52">ARCHITECTURE · V1 SYSTEM CONTEXT</text>
+    <text class="title" x="48" y="92">What LIMBUZZ owns, and what it depends on</text>
+    <text class="copy" x="48" y="120">The emergency path stays on the Android device until the cellular network reaches trusted contacts.</text>
+
+    <!-- Edges are deliberately behind the cards. -->
+    <g fill="none" stroke="#4f5d75" stroke-width="1.35" marker-end="url(#context-arrow)">
+      <path d="M192 326 H280"/>
+      <path d="M280 344 H224 Q216 344 216 352 V392 Q216 400 224 400 H280"/>
+      <path d="M480 300 H540" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M380 364 V470" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M440 364 V430 Q440 442 452 442 H650 V470"/>
+      <path d="M380 574 V650"/>
+      <path d="M500 690 V620 Q500 608 512 608 H650 V574" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M760 290 H800"/>
+      <path d="M760 332 H780 Q788 332 788 340 V386 Q788 394 800 394"/>
+      <path d="M760 374 H780 Q788 374 788 450 V500 Q788 508 800 508"/>
+      <path d="M760 416 H780 Q788 416 788 560 V614 Q788 622 800 622"/>
+      <path d="M940 328 H1040" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M940 442 H1000 Q1008 442 1008 390 V328 H1040"/>
+      <path d="M1120 440 V510"/>
+    </g>
+    <g fill="none" stroke="#eb6c36" stroke-width="1.8" marker-end="url(#context-arrow-accent)">
+      <path d="M940 552 H1040"/>
+    </g>
+    <g fill="none" stroke="#4f5d75" stroke-width="1.25" stroke-dasharray="5,4" marker-end="url(#context-arrow)">
+      <path d="M480 260 H880 Q900 260 900 220 H1040"/>
+      <path d="M870 290 V386"/>
+    </g>
+
+    <!-- External actors and services. -->
+    <rect x="48" y="280" width="144" height="96" rx="8" fill="#eef0f5" stroke="#7a8399"/>
+    <g transform="translate(64 302) scale(.85)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></g>
+    <text class="tag" x="104" y="312">ACTOR</text><text class="name" x="104" y="340">User</text><text class="copy" x="104" y="362">holds SOS</text>
+
+    <rect x="1040" y="180" width="192" height="90" rx="8" fill="#ffffff" stroke="#7a8399"/>
+    <g transform="translate(1056 200)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.7 18C4.1 18 2 16 2 13.5S4.1 9 6.7 9c.4-1.8 1.8-3.2 3.7-3.8 1.9-.6 4-.2 5.4 1.1 1.5 1.2 2.2 3 1.8 4.8h1c1.9 0 3.5 1.6 3.5 3.5S20.5 18 18.6 18z"/></g>
+    <text class="tag" x="1096" y="216">OPTIONAL</text><text class="name" x="1096" y="240">Firebase Auth</text><text class="copy" x="1096" y="258">Google Sign-In</text>
+
+    <rect x="1040" y="300" width="192" height="100" rx="8" fill="#fff0ea" stroke="#eb6c36"/>
+    <g transform="translate(1056 322)" fill="none" stroke="#eb6c36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-14"/><path d="M11 4h2M12 17v.01"/></g>
+    <text class="tag" x="1096" y="332">CELLULAR</text><text class="name" x="1096" y="358">SMS + voice</text><text class="copy" x="1096" y="380">emergency transport</text>
+
+    <rect x="1040" y="480" width="192" height="100" rx="8" fill="#eef0f5" stroke="#7a8399"/>
+    <g transform="translate(1056 500)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M13 15h2a4 4 0 0 1 4 4v2"/></g>
+    <text class="tag" x="1096" y="510">RECIPIENTS</text><text class="name" x="1096" y="536">Emergency contacts</text><text class="copy" x="1096" y="558">receive alerts</text>
+
+    <rect x="1040" y="620" width="192" height="90" rx="8" fill="#ffffff" stroke="#7a8399"/>
+    <g transform="translate(1056 642)" fill="none" stroke="#7a8399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g>
+    <text class="tag" x="1096" y="652">MAP LINK</text><text class="name" x="1096" y="676">Map provider</text><text class="copy" x="1096" y="698">opened by recipient</text>
+
+    <!-- Android device boundary. -->
+    <rect x="220" y="170" width="760" height="560" rx="12" fill="#2d3142" fill-opacity="0.02" stroke="#eb6c36" stroke-width="1.2" stroke-dasharray="5,5"/>
+    <rect x="240" y="174" width="190" height="18" rx="2" fill="#f5f5f5"/><text class="lane" x="248" y="187">ANDROID DEVICE · V1</text>
+
+    <rect x="280" y="260" width="200" height="104" rx="8" fill="#fff0ea" stroke="#eb6c36"/>
+    <g transform="translate(296 282)" fill="none" stroke="#eb6c36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-14"/><path d="M11 4h2M12 17v.01"/></g>
+    <text class="tag" x="336" y="286">APP</text><text class="name" x="336" y="312">LIMBUZZ Flutter app</text><text class="copy" x="336" y="336">screens · state machine</text><text class="copy" x="336" y="354">orchestration · status</text>
+
+    <rect x="540" y="250" width="220" height="130" rx="8" fill="#ffffff" stroke="#2d3142"/>
+    <g transform="translate(556 272)" fill="none" stroke="#2d3142" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-14"/><path d="M11 4h2M12 17v.01"/></g>
+    <text class="tag" x="596" y="276">ADAPTERS</text><text class="name" x="596" y="302">Native Android</text><text class="copy" x="596" y="326">permissions · lifecycle</text><text class="copy" x="596" y="344">platform capability bridge</text><text class="copy" x="596" y="362">reboot restoration</text>
+
+    <rect x="280" y="470" width="200" height="104" rx="8" fill="#ffffff" stroke="#2d3142"/>
+    <g transform="translate(296 492)" fill="none" stroke="#2d3142" stroke-width="1.5" stroke-linecap="round"><path d="M4 6a8 3 0 1 0 16 0M4 6v6a8 3 0 0 0 16 0V6M4 12v6a8 3 0 0 0 16 0v-6"/></g>
+    <text class="tag" x="336" y="496">LOCAL</text><text class="name" x="336" y="522">Local database</text><text class="copy" x="336" y="546">contacts · sessions</text><text class="copy" x="336" y="564">actions</text>
+
+    <rect x="540" y="470" width="220" height="104" rx="8" fill="#ffffff" stroke="#2d3142"/>
+    <g transform="translate(556 492)" fill="none" stroke="#2d3142" stroke-width="1.5" stroke-linecap="round"><path d="M4 6a8 3 0 1 0 16 0M4 6v6a8 3 0 0 0 16 0V6M4 12v6a8 3 0 0 0 16 0v-6"/></g>
+    <text class="tag" x="596" y="496">PRIVATE FILES</text><text class="name" x="596" y="522">Audio recordings</text><text class="copy" x="596" y="546">app-private storage</text><text class="copy" x="596" y="564">user-controlled sharing</text>
+
+    <rect x="280" y="650" width="220" height="80" rx="8" fill="#fff0ea" stroke="#eb6c36"/>
+    <g transform="translate(296 670)" fill="none" stroke="#eb6c36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11a7 7 0 0 1 14 0v6H5z"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 17v.01"/></g>
+    <text class="tag" x="336" y="674">DURABLE</text><text class="name" x="336" y="700">Foreground service</text><text class="copy" x="336" y="718">persistent emergency session</text>
+
+    <g>
+      <rect x="800" y="250" width="140" height="80" rx="8" fill="#ffffff" stroke="#7a8399"/><text class="tag" x="816" y="274">LOCATION</text><text class="name" x="816" y="300">Device fix</text><text class="copy" x="816" y="320">map URL if ready</text>
+      <rect x="800" y="356" width="140" height="80" rx="8" fill="#fff0ea" stroke="#eb6c36"/><text class="tag" x="816" y="380">SMS</text><text class="name" x="816" y="406">SMS manager</text><text class="copy" x="816" y="426">all contacts</text>
+      <rect x="800" y="462" width="140" height="80" rx="8" fill="#ffffff" stroke="#7a8399"/><text class="tag" x="816" y="486">VOICE</text><text class="name" x="816" y="512">Call manager</text><text class="copy" x="816" y="532">primary contact</text>
+      <rect x="800" y="568" width="140" height="80" rx="8" fill="#ffffff" stroke="#7a8399"/><text class="tag" x="816" y="592">AUDIO</text><text class="name" x="816" y="618">Microphone</text><text class="copy" x="816" y="638">local recording</text>
+    </g>
+
+    <rect x="48" y="780" width="1184" height="1" fill="#2d3142" fill-opacity="0.18"/>
+    <text class="legend" x="48" y="812">BOUNDARY RULE</text><text class="copy" x="150" y="812">Emergency SMS and voice use the cellular network; optional Firebase sign-in never sits on the SOS critical path.</text>
+  </svg>

@@ -8,6 +8,8 @@ The system context and local data model remain inline Mermaid. The SOS emergency
 
 - [V1 build boundary source HTML](diagrams/v1-boundary.html)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
+- [V1 system context source HTML](diagrams/system-context.html)
+- [V1 system context SVG export](diagrams/system-context.svg)
 - [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
 - [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
 - [SOS operational flow source HTML](diagrams/sos-emergency-operation.html)
@@ -67,6 +69,10 @@ flowchart LR
     App -. optional sign-in .-> Firebase
     App --> User
 ```
+
+![LIMBUZZ V1 system context companion diagram](diagrams/system-context.svg)
+
+Editable source: [V1 system context HTML](diagrams/system-context.html). This icon-assisted SVG is a companion view of the Mermaid diagram above; it does not replace or change the Mermaid source.
 
 ### System boundary
 
