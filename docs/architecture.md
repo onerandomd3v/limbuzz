@@ -8,6 +8,8 @@ The system context and local data model remain inline Mermaid. The SOS emergency
 
 - [V1 build boundary source HTML](diagrams/v1-boundary.html)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
+- [V1 system context source HTML](diagrams/system-context.html)
+- [V1 system context SVG export](diagrams/system-context.svg)
 - [SOS emergency flow source HTML](diagrams/sos-emergency-sequence.html)
 - [SOS emergency flow SVG export](diagrams/sos-emergency-sequence.svg)
 - [SOS operational flow source HTML](diagrams/sos-emergency-operation.html)
@@ -68,6 +70,10 @@ flowchart LR
     App --> User
 ```
 
+![LIMBUZZ V1 system context companion diagram](diagrams/system-context.svg)
+
+Editable source: [V1 system context HTML](diagrams/system-context.html). This icon-assisted SVG is a companion view of the Mermaid diagram above; it does not replace or change the Mermaid source.
+
 ### System boundary
 
 The Flutter application owns screens, validation, the SOS state machine, orchestration, and user-visible status. Native Android adapters own platform capabilities that Flutter cannot guarantee by itself: SMS dispatch, calls, location, microphone access, foreground-service lifecycle, reboot restoration, and permission state.
@@ -75,6 +81,16 @@ The Flutter application owns screens, validation, the SOS state machine, orchest
 The cellular network is the emergency transport. Firebase is outside the critical path and may be unreachable, unavailable, or unused.
 
 ## 2. SOS emergency flow
+
+### What happens when SOS is pressed
+
+1. The user holds the SOS control for three seconds. Releasing it earlier cancels activation without side effects.
+2. At three seconds, LIMBUZZ persists the emergency session and starts the Android foreground service. Audio recording begins immediately when microphone permission is available, and location capture starts in parallel.
+3. The device sends an emergency SMS to every configured contact. It does not wait for the audio recording or a perfect location fix; if no location is ready by ten seconds, the alert continues without it.
+4. After SMS dispatch begins, LIMBUZZ calls the primary contact. Audio continues while the emergency session is active, and SMS retries and per-contact status are shown independently.
+5. The recording stays in the app’s private device storage. It is not automatically sent to contacts, uploaded, or placed in the cloud.
+6. When the user cancels or ends the emergency, recording stops, the session closes, and an all-clear SMS goes to every contact already alerted.
+7. If the app is force-closed or the phone reboots while the session is open, LIMBUZZ restores the session on the next launch and asks whether the emergency is over.
 
 ![LIMBUZZ V1 SOS emergency flow](diagrams/sos-emergency-sequence.svg)
 
