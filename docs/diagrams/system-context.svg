@@ -16,26 +16,26 @@
     <!-- Edges are deliberately behind the cards. -->
     <g fill="none" stroke="#4f5d75" stroke-width="1.35" marker-end="url(#context-arrow)">
       <path d="M192 326 H280"/>
-      <path d="M280 344 H224 Q216 344 216 352 V392 Q216 400 224 400 H280"/>
+      <path d="M280 350 H192"/>
       <path d="M480 300 H540" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
       <path d="M380 364 V470" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
-      <path d="M440 364 V430 Q440 442 452 442 H650 V470"/>
-      <path d="M380 574 V650"/>
-      <path d="M500 690 V620 Q500 608 512 608 H650 V574" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M440 364 V430 Q440 442 452 442 H650 V470" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M390 574 V650"/>
+      <path d="M390 650 V610 Q390 598 380 598 V574" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
       <path d="M760 290 H800"/>
       <path d="M760 332 H780 Q788 332 788 340 V386 Q788 394 800 394"/>
       <path d="M760 374 H780 Q788 374 788 450 V500 Q788 508 800 508"/>
-      <path d="M760 416 H780 Q788 416 788 560 V614 Q788 622 800 622"/>
-      <path d="M940 328 H1040" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
-      <path d="M940 442 H1000 Q1008 442 1008 390 V328 H1040"/>
-      <path d="M1120 440 V510"/>
+      <path d="M760 360 H780 Q788 360 788 560 V614 Q788 622 800 622"/>
+      <path d="M940 396 H990 Q1000 396 1000 350 H1040" marker-end="url(#context-arrow)" marker-start="url(#context-arrow-reverse)"/>
+      <path d="M940 502 H990 Q1000 502 1000 360 H1040"/>
+      <path d="M1136 580 V620"/>
     </g>
     <g fill="none" stroke="#eb6c36" stroke-width="1.8" marker-end="url(#context-arrow-accent)">
-      <path d="M940 552 H1040"/>
+      <path d="M1136 400 V480"/>
     </g>
     <g fill="none" stroke="#4f5d75" stroke-width="1.25" stroke-dasharray="5,4" marker-end="url(#context-arrow)">
-      <path d="M480 260 H880 Q900 260 900 220 H1040"/>
-      <path d="M870 290 V386"/>
+      <path d="M380 260 V220 H1000 Q1040 220 1040 225"/>
+      <path d="M870 330 V356"/>
     </g>
 
     <!-- External actors and services. -->
