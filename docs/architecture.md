@@ -4,10 +4,11 @@ This document translates the V1 product requirements into an implementation-leve
 
 ## Diagram exports
 
-The system context and local data model remain inline Mermaid. The SOS sequence is maintained as an editable Koboyo diagram, and the V1 build boundary is available as a local SVG.
+The system context and local data model remain inline Mermaid. The SOS sequence is maintained as editable HTML with a standalone SVG export, and the V1 build boundary is available as a local SVG.
 
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
-- [SOS sequence in Koboyo](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
+- [SOS sequence source HTML](diagrams/sos-emergency-sequence.html)
+- [SOS sequence SVG export](diagrams/sos-emergency-sequence.svg)
 
 ## Architecture principles
 
@@ -68,12 +69,9 @@ The cellular network is the emergency transport. Firebase is outside the critica
 
 ## 2. SOS emergency sequence
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg?theme=dark">
-  <img alt="LIMBUZZ V1 SOS Emergency Flow" src="https://koboyo.com/e/c748e1d3-b8db-4766-8695-7e7107583d0b/de46e9fd-2629-4303-9f6d-5e0832064a4c.svg">
-</picture>
+![LIMBUZZ V1 SOS emergency sequence](diagrams/sos-emergency-sequence.svg)
 
-Editable version: [Koboyo SOS Emergency Flow](https://koboyo.com/edit/bippy-technical-architecture-px2cv9)
+Editable source: [SOS sequence HTML](diagrams/sos-emergency-sequence.html). The SVG is a standalone export of that source.
 
 ### Important runtime rules
 
