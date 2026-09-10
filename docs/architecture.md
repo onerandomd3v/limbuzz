@@ -23,6 +23,10 @@ The system context and local data model remain inline Mermaid. The SOS emergency
 - Firebase is optional authentication infrastructure, not a dependency of the emergency path.
 - No V1 application backend, gateway SMS, push notification service, or cloud media storage.
 
+## How V1 works at a glance
+
+A user opens LIMBUZZ and holds SOS for three seconds. The app saves the emergency session, starts the Android foreground service, begins location capture and local audio where permission allows, and sends an emergency SMS from the device to every configured contact. SMS retries and delivery status are tracked independently. After SMS dispatch begins, LIMBUZZ calls the primary contact. The user can cancel at any time; cancellation sends an all-clear to every contact already alerted. If the app is force-closed or the phone reboots, the open session is restored when the app starts again.
+
 ## 1. V1 system context
 
 ```mermaid
@@ -91,6 +95,7 @@ This companion swimlane shows which actor owns each step after the hold complete
 5. Any one failure is recorded and shown without stopping the rest of the sequence.
 6. Cancel sends an all-clear to every contact already alerted, without a confirmation prompt.
 7. Every state transition and action result is persisted so force-close and reboot recovery can resume safely.
+8. Audio recording begins on activation where permission allows; it runs locally and does not block alert delivery.
 
 ## 3. Local data model
 
@@ -134,6 +139,7 @@ erDiagram
         string action_type "SMS, CALL, LOCATION, AUDIO, ALL_CLEAR"
         string status "PENDING, SENT, FAILED, SKIPPED"
         integer attempt_count
+        datetime next_attempt_at "nullable for retryable SMS"
         string error_code "nullable"
         datetime attempted_at
         datetime completed_at "nullable"
@@ -163,6 +169,7 @@ erDiagram
 - Contacts and sessions are readable without connectivity.
 - Audio files remain in app-private device storage until the user explicitly shares or deletes one.
 - The database is the source of truth for recovery; in-memory state is only a live projection for the UI.
+- Retryable actions persist their next attempt time so a force-close or reboot cannot lose the SMS retry schedule.
 - A future sign-in links existing guest data instead of replacing it.
 
 ## 4. Build boundary for V1
