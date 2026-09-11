@@ -28,3 +28,7 @@ The SVG diagrams have editable, self-contained HTML sources in `docs/diagrams/` 
 ## V1 scope boundary
 
 The critical emergency path does not depend on a backend, gateway SMS, push notifications, cloud media storage, or sign-in. A future Backend API remains technology TBD behind a typed API boundary and outside offline SOS. Device-side SMS, calls, location, foreground-session recovery, and local audio remain platform capabilities owned by the Emergency Platform Layer.
+
+## Development workflow
+
+Expo Go is useful for early UI experiments, but LIMBUZZ uses Expo Development Builds for real development because the emergency platform requires custom Kotlin/native Android modules and will later require Swift/native iOS modules. A Development Build is a custom app binary with those native capabilities included; the shared React Native and TypeScript code still supports fast refresh. EAS Build or local native builds can compile the platform-specific app artifacts.

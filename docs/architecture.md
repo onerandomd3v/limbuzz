@@ -86,6 +86,26 @@ The React Native + Expo application owns the UI, navigation, contacts management
 
 The cellular network is the emergency transport. The Backend API is technology TBD behind a typed API boundary and remains outside the critical offline SOS path; the app must continue to activate and run SOS when it is unavailable.
 
+### Shared emergency platform contract
+
+The TypeScript app calls a shared contract rather than calling Android or iOS APIs directly. The contract is conceptual and will be implemented by one platform service per operating system:
+
+```ts
+interface EmergencyAlertService {
+  sendEmergencyAlert(input: EmergencyAlertInput): Promise<AlertDispatchResult>
+  callPrimaryContact(): Promise<CallResult>
+  startLocationTracking(): Promise<LocationSession>
+  startEmergencyAudio(): Promise<AudioSession>
+  cancelEmergency(): Promise<AllClearResult>
+}
+```
+
+The Android implementation uses Kotlin/native integrations to provide the V1 device-side SMS behavior. A future iOS implementation uses Swift/native integrations and may return a user-action-required result where iOS requires approval before an SMS can be sent; iOS is not expected to reproduce Android automation exactly.
+
+### Expo development workflow
+
+Expo Go is a convenient prototype sandbox, but it is not the production foundation for LIMBUZZ because it cannot contain every custom Kotlin or Swift integration the emergency platform requires. An Expo Development Build is a custom LIMBUZZ app binary that includes those native modules and configuration while preserving TypeScript fast refresh for the shared app layer. EAS Build or local native builds can produce the Android and future iOS artifacts; the choice between cloud and local build execution is a delivery decision, not a change to the app architecture.
+
 ## 2. SOS emergency flow
 
 ### What happens when SOS is pressed
