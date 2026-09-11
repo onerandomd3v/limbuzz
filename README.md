@@ -1,6 +1,6 @@
 # LIMBUZZ
 
-LIMBUZZ is an Android-focused personal-safety project. Its V1 is designed around a dependable, device-local SOS path: a person can alert trusted contacts even when the app has no internet connection.
+LIMBUZZ is an Android-first, cross-platform personal-safety project. Its V1 uses React Native, Expo, and TypeScript for the shared app layer, with Kotlin/native Android integrations behind a typed Emergency Platform Layer. The app is built with Expo Development Builds, while future Swift/iOS integrations can implement the same platform contract later.
 
 ## V1 emergency experience
 
@@ -18,6 +18,7 @@ The V1 architecture, runtime rules, data model, and diagram exports are document
 It includes:
 
 - a system-context Mermaid diagram and local data-model Mermaid diagram;
+- an icon-assisted system-context SVG companion showing the mobile platform boundary;
 - an SOS state flow for the simple user-visible progression;
 - a companion swimlane showing service, Android, and contact handoffs; and
 - the V1 build boundary separating the device-local emergency path from deferred cloud features.
@@ -26,4 +27,4 @@ The SVG diagrams have editable, self-contained HTML sources in `docs/diagrams/` 
 
 ## V1 scope boundary
 
-The critical emergency path does not depend on a LIMBUZZ backend, gateway SMS, push notifications, cloud media storage, or sign-in. Firebase may support optional authentication, but it is not required to activate or run SOS.
+The critical emergency path does not depend on a backend, gateway SMS, push notifications, cloud media storage, or sign-in. A future Backend API remains technology TBD behind a typed API boundary and outside offline SOS. Device-side SMS, calls, location, foreground-session recovery, and local audio remain platform capabilities owned by the Emergency Platform Layer.

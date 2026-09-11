@@ -1,10 +1,10 @@
 # LIMBUZZ V1 Architecture
 
-This document translates the V1 product requirements into an implementation-level architecture. It is intentionally limited to the controlled Android pilot.
+This document translates the V1 product requirements into an implementation-level mobile architecture. It is Android-first for the controlled pilot, but the app layer and platform boundary are designed to support iOS later.
 
 ## Diagram exports
 
-The system context and local data model remain inline Mermaid. The SOS emergency flow and V1 build boundary are maintained as editable HTML with standalone SVG exports.
+The system context and local data model remain inline Mermaid. The system context also has an icon-assisted companion export, while the SOS emergency flow and V1 build boundary are maintained as editable HTML with standalone SVG exports.
 
 - [V1 build boundary source HTML](diagrams/v1-boundary.html)
 - [V1 build boundary SVG](diagrams/v1-boundary.svg)
@@ -22,8 +22,10 @@ The system context and local data model remain inline Mermaid. The SOS emergency
 - SMS dispatch happens before the primary-contact call.
 - An active emergency is a persisted session owned by an Android foreground service.
 - Location and audio are used only during an active emergency.
-- Firebase is optional authentication infrastructure, not a dependency of the emergency path.
-- No V1 application backend, gateway SMS, push notification service, or cloud media storage.
+- The app layer uses React Native, Expo, and TypeScript; Expo Development Builds are the native-capability boundary.
+- Emergency platform capabilities sit behind a typed abstraction: Kotlin/native Android integrations are implemented first, with Swift/native iOS integrations added later.
+- A Backend API is technology-agnostic and TBD behind a typed API boundary; it is never a dependency of the critical offline SOS path.
+- No V1 gateway SMS, push notification service, or cloud media storage is required for SOS.
 
 ## How V1 works at a glance
 
@@ -37,11 +39,13 @@ flowchart LR
     Contacts((Emergency contacts))
     Carriers[Cellular carriers\nSMS and voice]
     Maps[Map provider\nlink opened by recipient]
-    Firebase[Firebase Auth\noptional Google Sign-In]
+    Backend[Backend API\ntechnology TBD\nnon-critical]
 
-    subgraph Device[Android device]
-        App[LIMBUZZ Flutter app]
-        Native[Native Android adapters]
+    subgraph Device[Mobile device]
+        App[LIMBUZZ Expo / React Native app\nTypeScript]
+        Platform[Emergency platform layer\ntyped abstraction]
+        Android[Kotlin Android integrations\nExpo Development Build]
+        IOS[Future Swift / iOS integrations]
         Store[(Local database\ncontacts, sessions, actions)]
         Files[(Private local files\naudio recordings)]
         FGS[Android foreground service\npersistent emergency session]
@@ -52,21 +56,23 @@ flowchart LR
     end
 
     User --> App
-    App <--> Native
+    App <--> Platform
+    Platform --> Android
+    Platform -. future .-> IOS
     App <--> Store
     App <--> Files
-    App --> FGS
+    Android --> FGS
     FGS <--> Store
-    Native --> Location
-    Native --> SMS
-    Native --> Phone
-    Native --> Audio
+    Android --> Location
+    Android --> SMS
+    Android --> Phone
+    Android --> Audio
     Location -. map URL .-> SMS
     SMS --> Carriers
     Phone --> Carriers
     Carriers --> Contacts
     Contacts --> Maps
-    App -. optional sign-in .-> Firebase
+    App -. non-critical API .-> Backend
     App --> User
 ```
 
@@ -76,9 +82,9 @@ Editable source: [V1 system context HTML](diagrams/system-context.html). This ic
 
 ### System boundary
 
-The Flutter application owns screens, validation, the SOS state machine, orchestration, and user-visible status. Native Android adapters own platform capabilities that Flutter cannot guarantee by itself: SMS dispatch, calls, location, microphone access, foreground-service lifecycle, reboot restoration, and permission state.
+The React Native + Expo application owns the UI, navigation, contacts management, SOS state/UI, local-data access, authentication UI, settings, shared business logic, validation, orchestration, and user-visible status. A typed Emergency Platform Layer separates that shared app code from native capabilities. Kotlin/native Android integrations implement SMS dispatch, calls, location, microphone access, foreground-service lifecycle, reboot restoration, and permission state in Expo Development Builds. Future Swift/native iOS integrations implement the iOS-compatible platform contract without changing the shared app layer.
 
-The cellular network is the emergency transport. Firebase is outside the critical path and may be unreachable, unavailable, or unused.
+The cellular network is the emergency transport. The Backend API is technology TBD behind a typed API boundary and remains outside the critical offline SOS path; the app must continue to activate and run SOS when it is unavailable.
 
 ## 2. SOS emergency flow
 
@@ -119,7 +125,7 @@ This companion swimlane shows which actor owns each step after the hold complete
 erDiagram
     USER_PROFILE {
         string id PK
-        string google_subject UK "nullable"
+        string external_subject UK "nullable; provider-managed sign-in"
         datetime created_at
         datetime updated_at
     }
@@ -186,7 +192,7 @@ erDiagram
 - Audio files remain in app-private device storage until the user explicitly shares or deletes one.
 - The database is the source of truth for recovery; in-memory state is only a live projection for the UI.
 - Retryable actions persist their next attempt time so a force-close or reboot cannot lose the SMS retry schedule.
-- A future sign-in links existing guest data instead of replacing it.
+- A future sign-in links existing guest data instead of replacing it; its provider remains outside the SOS platform contract.
 
 ## 4. Build boundary for V1
 
@@ -194,8 +200,10 @@ erDiagram
 
 ## 5. Open implementation decisions
 
-- Select and validate the Flutter local database package against API 24 and low-end devices.
+- Select and validate an Expo-compatible local database package against Android API 24 and low-end devices.
+- Define the typed Backend API boundary and choose its implementation technology later without making it a dependency of SOS.
+- Implement the Kotlin Android modules through Expo Development Builds and keep the Swift/iOS adapter contract ready for the later platform.
 - Decide the audio storage cap before implementing the recording feature.
 - Finalize emergency and all-clear message copy before SMS implementation.
-- Create and back up the Android release keystore; register development and release SHA-1 fingerprints with Firebase.
-- Confirm Android OEM behavior for foreground-service permissions, reboot receivers, SMS, calls, and battery optimization.
+- Create and back up the Android release keystore for Expo Development Builds and the controlled APK pilot.
+- Confirm Android OEM behavior for foreground-service permissions, reboot receivers, SMS, calls, and battery optimization; document the corresponding iOS capability differences before adding Swift integrations.
